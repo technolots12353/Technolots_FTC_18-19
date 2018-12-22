@@ -1,0 +1,142 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+public class RoverHardware
+{
+    final double POS = 0.5;
+    final double NEG = -0.5;
+    final double OFF = 0;
+    
+    /* Public OpMode members. */
+    public DcMotor  fl   = null;
+    public DcMotor  fr  = null;
+    public DcMotor  bl  = null;
+    public DcMotor  br  = null;
+
+    /* local OpMode members. */
+    HardwareMap hwMap           =  null;
+    private ElapsedTime period  = new ElapsedTime();
+
+    /* Constructor */
+    public RoverHardware(){
+
+    }
+
+    /* Initialize standard Hardware interfaces */
+    public void init(HardwareMap ahwMap) {
+        // Save reference to Hardware map
+        hwMap = ahwMap;
+
+        // Define and Initialize Motors
+        fr = hwMap.get(DcMotor.class, "fr");
+        fl = hwMap.get(DcMotor.class, "fl");
+        bl = hwMap.get(DcMotor.class, "bl");
+        br = hwMap.get(DcMotor.class, "br");
+        
+        // Set all motors to zero power
+        fr.setPower(0);
+        fl.setPower(0);
+        bl.setPower(0);
+        br.setPower(0);
+
+        // Set all motors to run without encoders.
+        // May want to use RUN_USING_ENCODERS if encoders are installed.
+        fl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        fr.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        bl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        br.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    }
+
+//METHODS
+
+// move forward
+public void forward(){
+    fl.setPower(POS);
+    fr.setPower(POS);
+    bl.setPower(POS);
+    br.setPower(POS);
+ }
+
+// move  backward
+public void backward(){
+    fl.setPower(NEG);
+    fr.setPower(NEG);
+    bl.setPower(NEG);
+    br.setPower(NEG);
+}
+
+// stafe right
+public void right(){
+    fl.setPower(POS);
+    fr.setPower(NEG);
+    bl.setPower(NEG);
+    br.setPower(POS);
+}
+
+// stafe left
+public void left(){
+    fl.setPower(NEG);
+    fr.setPower(POS);
+    bl.setPower(POS);
+    br.setPower(NEG);
+} 
+ 
+// diagonal forward left
+public void forwardLeft(){
+    fl.setPower(POS);
+    fr.setPower(OFF);
+    bl.setPower(OFF);
+    br.setPower(POS);
+}
+
+// diagonal forward right
+public void forwardRight(){
+    fl.setPower(OFF);
+    fr.setPower(POS);
+    bl.setPower(POS);
+    br.setPower(OFF);
+}
+
+// diagonal backward right
+public void backwardRight(){
+    fl.setPower(OFF);
+    fr.setPower(NEG);
+    bl.setPower(NEG);
+    br.setPower(OFF);
+}
+
+// diagonal backward left
+public void backwardLeft(){
+    fl.setPower(NEG);
+    fr.setPower(OFF);
+    bl.setPower(OFF);
+    br.setPower(NEG);
+}
+// spin right
+public void spinRight(){
+    fl.setPower(NEG);
+    fr.setPower(POS);
+    bl.setPower(NEG);
+    br.setPower(POS);
+}
+// spin left
+public void spinLeft(){
+    fl.setPower(POS);
+    fr.setPower(NEG);
+    bl.setPower(POS);
+    br.setPower(NEG);
+}
+
+// STOP MOVING
+public void stop(){
+    fl.setPower(OFF);
+    fr.setPower(OFF);
+    bl.setPower(OFF);
+    br.setPower(OFF);
+}
+
+}
