@@ -1,0 +1,37 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.Hardware;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
+@TeleOp(name="TeleOp", group="tele")
+
+public class Teleop extends LinearOpMode {
+
+RoverHardware robot = new RoverHardware();
+
+@Override
+public void runOpMode(){
+    
+    robot.init(hardwareMap);
+    
+    waitForStart();
+    
+    while(opModeIsActive()){
+        //////////////////////  DRIVER 1 ///////////////////
+        
+        if(gamepad1.x){
+            robot.fl.setPower(-gamepad1.left_stick_x/2 + gamepad1.left_stick_y/2 + gamepad1.right_stick_x/2);
+            robot.fr.setPower(gamepad1.left_stick_x/2 + gamepad1.left_stick_y/2 - gamepad1.right_stick_x/2);
+            robot.bl.setPower(gamepad1.left_stick_x/2 + gamepad1.left_stick_y/2 + gamepad1.right_stick_x/2);
+            robot.br.setPower(-gamepad1.left_stick_x/2 + gamepad1.left_stick_y/2 - gamepad1.right_stick_x/2);
+        }else{
+            robot.fl.setPower(-gamepad1.left_stick_x + gamepad1.left_stick_y + gamepad1.right_stick_x);
+            robot.fr.setPower(gamepad1.left_stick_x + gamepad1.left_stick_y - gamepad1.right_stick_x);
+            robot.bl.setPower(gamepad1.left_stick_x + gamepad1.left_stick_y + gamepad1.right_stick_x);
+            robot.br.setPower(-gamepad1.left_stick_x + gamepad1.left_stick_y - gamepad1.right_stick_x);
+        }
+    }
+}
+    
+}
