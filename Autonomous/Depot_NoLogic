@@ -1,0 +1,52 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
+@Autonomous(name = "Depot")
+
+public class Depot extends LinearOpMode{
+
+    RoverHardware robot = new RoverHardware();
+    private ElapsedTime runtime = new ElapsedTime();
+    
+    @Override
+    public void runOpMode(){
+    
+    robot.init(hardwareMap);
+    
+    waitForStart();
+    
+    robot.forward();
+    runtime.reset();
+    while(opModeIsActive() && (runtime.seconds() <= 5)){
+        telemetry.addData("Reaching Depot for: ", runtime.seconds());    
+    }
+    robot.stop();
+    
+    //servo drop marker
+    
+    robot.spinLeft();
+    runtime.reset();
+    while(opModeIsActive() && (runtime.seconds() <= .3)){
+        telemetry.addData("Turning to face crater for: ", runtime.seconds());    
+    }
+    robot.stop();
+    
+    robot.right();
+    runtime.reset();
+    while(opModeIsActive() && (runtime.seconds() <= 2)){
+        telemetry.addData("strafe right: ", runtime.seconds());    
+    }
+    robot.stop();
+    
+     robot.forward();
+    runtime.reset();
+    while(opModeIsActive() && (runtime.seconds() <= 7)){
+        telemetry.addData("forward to crater: ", runtime.seconds());    
+    }
+    robot.stop();
+    
+    }       
+}
